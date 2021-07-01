@@ -86,7 +86,12 @@ public class VideoPlayer {
 
       videoTags += "]";
 
-      System.out.println(videoTitle + " (" + videoId + ") " + videoTags);
+      if(videoLibrary.getVideo(videoId).isFlagged() == true){
+        System.out.println(videoTitle + " (" + videoId + ") " + videoTags + " - FLAGGED " + videoLibrary.getVideo(videoId).getFlagReason());
+      }
+      else {
+        System.out.println(videoTitle + " (" + videoId + ") " + videoTags);
+      }
     }
   }
 
@@ -236,7 +241,7 @@ public class VideoPlayer {
       videoTags += "]";
 
       String currentlyPlayingString = "Currently playing: " + videoTitle + " (" + videoId + ") " + videoTags;
-
+     
       if(isPaused == false){
         System.out.println(currentlyPlayingString);
       }
@@ -327,18 +332,10 @@ public class VideoPlayer {
       }
     }
 
-    if((doesPlaylistExists == true) && (doesVideoExists == true) && (isInPlaylist == false)) {
+    if((doesPlaylistExists == true) && (doesVideoExists == true) && (isInPlaylist == false) && (videoLibrary.getVideo(videoId).isFlagged() == false)) {
       playListLibrary.get(playListIndex).addVideoToPlaylist(videoId);
       System.out.println("Added video to " + playlistName + ": " + videoArray.get(videoIndex).getTitle());
     }
-
-    // if(playListLibrary.size() >= 1) {
-    //   for(int k = 0; k < playListLibrary.size(); k++ ) {
-    //     System.out.println("--------------------------------");
-    //     System.out.println(playListLibrary.get(k).getName());
-    //     System.out.println(playListLibrary.get(k).getIdList());
-    //   }
-    // }
   }
 
   public void showAllPlaylists() {
@@ -408,8 +405,12 @@ public class VideoPlayer {
 
           currentVideoTags += "]";
 
-          System.out.println(currentVideoTitle + " (" + currentVideoId + ") " + currentVideoTags);
-          
+          if(videoLibrary.getVideo(currentVideoId).isFlagged() == true){
+            System.out.println(currentVideoTitle + " (" + currentVideoId + ") " + currentVideoTags + " - FLAGGED " + videoLibrary.getVideo(currentVideoId).getFlagReason());
+          }
+          else {
+            System.out.println(currentVideoTitle + " (" + currentVideoId + ") " + currentVideoTags);
+          }
         }
       }
       else {
@@ -692,7 +693,7 @@ public class VideoPlayer {
     }
 
     if(videosIdToTitleMap.get(videoId) == null) {
-      System.out.println("Cannot play video: Video does not exist");
+      System.out.println("Cannot flag video: Video does not exist");
     }
     else if(videoLibrary.getVideo(videoId).isFlagged() == true) {
       System.out.println("Cannot flag video: Video is already flagged");
@@ -700,8 +701,13 @@ public class VideoPlayer {
     else {
       videoLibrary.getVideo(videoId).setFlaggedTrue();
       videoLibrary.getVideo(videoId).setFlagReason("Not supplied");
+      if(currentlyPlayingBool == true && currentlyPlayingId == videoId) {
+        stopVideo();
+      }
       System.out.println("Successfully flagged video: " + videosIdToTitleMap.get(videoId) + " " + videoLibrary.getVideo(videoId).getFlagReason());
     }
+
+
   }
 
   public void flagVideo(String videoId, String reason) {
@@ -715,7 +721,7 @@ public class VideoPlayer {
     }
 
     if(videosIdToTitleMap.get(videoId) == null) {
-      System.out.println("Cannot play video: Video does not exist");
+      System.out.println("Cannot flag video: Video does not exist");
     }
     else if(videoLibrary.getVideo(videoId).isFlagged() == true) {
       System.out.println("Cannot flag video: Video is already flagged");
@@ -723,6 +729,9 @@ public class VideoPlayer {
     else {
       videoLibrary.getVideo(videoId).setFlaggedTrue();
       videoLibrary.getVideo(videoId).setFlagReason(reason);
+      if(currentlyPlayingBool == true && currentlyPlayingId == videoId) {
+        stopVideo();
+      }
       System.out.println("Successfully flagged video: " + videosIdToTitleMap.get(videoId) + " " + videoLibrary.getVideo(videoId).getFlagReason());
     }
   }
