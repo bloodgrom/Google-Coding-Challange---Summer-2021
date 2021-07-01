@@ -16,6 +16,11 @@ public class VideoPlayer {
   private String currentlyPlayingId;
   private boolean isPaused;
   private List<VideoPlaylist> playListLibrary;
+  private ArrayList<Video> videoArrayGlobal;
+  private HashMap<Integer, Boolean> flagHash;
+  private HashMap<Integer, String> reasonHash;
+  private HashMap<String, HashMap> videosIdToFlagAndReasonGlobal;
+
 
   public VideoPlayer() {
     this.videoLibrary = new VideoLibrary();
@@ -25,6 +30,15 @@ public class VideoPlayer {
     this.currentlyPlayingId = "";
     this.isPaused = false;
     this.playListLibrary = new ArrayList<>();
+
+    this.videoArrayGlobal = new ArrayList<>(videoLibrary.getVideos());
+    this.flagHash = new HashMap<>();
+    this.reasonHash = new HashMap<>();
+
+    for(int sample = 0; sample < videoArrayGlobal.size(); sample++) {
+      flagHash.put(sample, false);
+      reasonHash.put(sample, null);
+    }
   }
 
   public void numberOfVideos() {
@@ -83,13 +97,16 @@ public class VideoPlayer {
     ArrayList<Video> videoArray = new ArrayList<>(videoLibrary.getVideos());
     HashMap<String, String> videosIdToTitleMap = new HashMap<>();
 
-    /* Mapping vidoe's ids to titles*/
+    /* Mapping video's ids to titles*/
     for(int i = 0; i < videoArray.size(); i++) {
       videosIdToTitleMap.put(videoArray.get(i).getVideoId(), videoArray.get(i).getTitle());
     }
 
     if(videosIdToTitleMap.get(videoId) == null) {
       System.out.println("Cannot play video: Video does not exist");
+    }
+    else if(videoLibrary.getVideo(videoId).isFlagged() == true) {
+      System.out.println("Cannot play video: Video is currently flagged " + videoLibrary.getVideo(videoId).getFlagReason());
     }
     else if(currentlyPlayingBool == false) {
       currentlyPlayingTitle = videosIdToTitleMap.get(videoId);
@@ -291,6 +308,10 @@ public class VideoPlayer {
       if(doesVideoExists == false){
         System.out.println("Cannot add video to " + playlistName + ": Video does not exist");
       }
+    }
+
+    if((doesPlaylistExists == true) && (doesVideoExists == true) && (videoLibrary.getVideo(videoId).isFlagged() == true)) {
+      System.out.println("Cannot add video to " + playlistName + ": Video is currently flagged " + videoLibrary.getVideo(videoId).getFlagReason());
     }
 
     if((doesPlaylistExists == true) && (doesVideoExists == true)) {
@@ -661,11 +682,49 @@ public class VideoPlayer {
   }
 
   public void flagVideo(String videoId) {
-    System.out.println("flagVideo needs implementation");
+    
+    ArrayList<Video> videoArray = new ArrayList<>(videoLibrary.getVideos());
+    HashMap<String, String> videosIdToTitleMap = new HashMap<>();
+
+    /* Mapping video's ids to titles*/
+    for(int i = 0; i < videoArray.size(); i++) {
+      videosIdToTitleMap.put(videoArray.get(i).getVideoId(), videoArray.get(i).getTitle());
+    }
+
+    if(videosIdToTitleMap.get(videoId) == null) {
+      System.out.println("Cannot play video: Video does not exist");
+    }
+    else if(videoLibrary.getVideo(videoId).isFlagged() == true) {
+      System.out.println("Cannot flag video: Video is already flagged");
+    }
+    else {
+      videoLibrary.getVideo(videoId).setFlaggedTrue();
+      videoLibrary.getVideo(videoId).setFlagReason("Not supplied");
+      System.out.println("Successfully flagged video: " + videosIdToTitleMap.get(videoId) + " " + videoLibrary.getVideo(videoId).getFlagReason());
+    }
   }
 
   public void flagVideo(String videoId, String reason) {
-    System.out.println("flagVideo needs implementation");
+    
+    ArrayList<Video> videoArray = new ArrayList<>(videoLibrary.getVideos());
+    HashMap<String, String> videosIdToTitleMap = new HashMap<>();
+
+    /* Mapping video's ids to titles*/
+    for(int i = 0; i < videoArray.size(); i++) {
+      videosIdToTitleMap.put(videoArray.get(i).getVideoId(), videoArray.get(i).getTitle());
+    }
+
+    if(videosIdToTitleMap.get(videoId) == null) {
+      System.out.println("Cannot play video: Video does not exist");
+    }
+    else if(videoLibrary.getVideo(videoId).isFlagged() == true) {
+      System.out.println("Cannot flag video: Video is already flagged");
+    }
+    else {
+      videoLibrary.getVideo(videoId).setFlaggedTrue();
+      videoLibrary.getVideo(videoId).setFlagReason(reason);
+      System.out.println("Successfully flagged video: " + videosIdToTitleMap.get(videoId) + " " + videoLibrary.getVideo(videoId).getFlagReason());
+    }
   }
 
   public void allowVideo(String videoId) {
