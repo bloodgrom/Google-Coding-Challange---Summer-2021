@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.net.*;
 
 /**
  * A class used to represent a Video Library.
@@ -20,7 +21,10 @@ class VideoLibrary {
     this.videos = new HashMap<>();
     try {
       
-      File file = new File("C:/Users/Anton/Desktop/Bright Network/google-code-sample/java/src/main/resources/videos.txt");
+      /* Used full path to link the file, as it didn't work with the provided one.*/
+      //File file = new File("C:/Users/Anton/Desktop/Bright Network/google-code-sample/java/src/main/resources/videos.txt");
+
+      File file = new File(this.getClass().getResource("/videos.txt").getFile());
 
       Scanner scanner = new Scanner(file);
       while (scanner.hasNextLine()) {

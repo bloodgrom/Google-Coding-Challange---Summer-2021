@@ -1,16 +1,16 @@
 -------------------------------------------------------------------------------
 Test set: com.google.VideoLibraryTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.008 s <<< FAILURE! - in com.google.VideoLibraryTest
-com.google.VideoLibraryTest.testLibraryParsesTagsCorrectly  Time elapsed: 0.002 s  <<< FAILURE!
+Tests run: 3, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.016 s <<< FAILURE! - in com.google.VideoLibraryTest
+com.google.VideoLibraryTest.testLibraryParsesTagsCorrectly  Time elapsed: 0.003 s  <<< FAILURE!
 org.opentest4j.AssertionFailedError: expected: not <null>
 	at com.google.VideoLibraryTest.testLibraryParsesTagsCorrectly(VideoLibraryTest.java:30)
 
-com.google.VideoLibraryTest.testLibraryHasAllVideos  Time elapsed: 0.002 s  <<< FAILURE!
+com.google.VideoLibraryTest.testLibraryHasAllVideos  Time elapsed: 0.007 s  <<< FAILURE!
 org.opentest4j.AssertionFailedError: expected: <0> but was: <5>
 	at com.google.VideoLibraryTest.testLibraryHasAllVideos(VideoLibraryTest.java:23)
 
-com.google.VideoLibraryTest.testLibraryParsesVideoCorrectlyWithoutTags  Time elapsed: 0.002 s  <<< FAILURE!
+com.google.VideoLibraryTest.testLibraryParsesVideoCorrectlyWithoutTags  Time elapsed: 0.003 s  <<< FAILURE!
 org.opentest4j.AssertionFailedError: expected: not <null>
 	at com.google.VideoLibraryTest.testLibraryParsesVideoCorrectlyWithoutTags(VideoLibraryTest.java:40)
 

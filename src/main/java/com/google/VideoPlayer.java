@@ -151,12 +151,24 @@ public class VideoPlayer {
   public void playRandomVideo() {
 
     isPaused = false;
+    int counter = 0;
+
+    String videoId = "";
 
     Random random = new Random();
     ArrayList<Video> videoArray = new ArrayList<>(videoLibrary.getVideos());
     int randomVideoIndex = random.nextInt(videoArray.size() - 1);
     
-    if(5 > 6) {
+    for(int i = 0; i < videoArray.size(); i++) {
+      videoId = videoArray.get(i).getVideoId();
+      if(videoLibrary.getVideo(videoId).isFlagged() == true) {
+        counter++;
+      }
+    }
+
+    int videosLeft = videoArray.size() - counter;
+
+    if(1 > videosLeft) {
       System.out.println("No videos available");
     }
     else if(currentlyPlayingBool == false) {
@@ -558,10 +570,10 @@ public class VideoPlayer {
 
     for(int z = 0; z < videoArray.size(); z++) {
       videoTitle = titleSort.get(z);
-      if(videoTitle.toLowerCase().contains(searchTerm.toLowerCase())) {
+      videoId = videoArray.get(videosMap.get(titleSort.get(z))).getVideoId();
+      if(videoTitle.toLowerCase().contains(searchTerm.toLowerCase()) && videoLibrary.getVideo(videoId).isFlagged() == false) {
         isAMatch = true;
         counter++;
-        videoId = videoArray.get(videosMap.get(titleSort.get(z))).getVideoId();
         searchVideosMap.put(counter, videoId);
         videoTagsWithCommas = videoArray.get(videosMap.get(titleSort.get(z))).getTags();
         videoTags = "[";
@@ -577,11 +589,11 @@ public class VideoPlayer {
         videoTags += "]";
       }
 
-      if(counter == 1 && isAMatch == true) {
+      if(counter == 1 && isAMatch == true  && videoLibrary.getVideo(videoId).isFlagged() == false) {
         System.out.println("Here are the results for " + searchTerm + ":");
         System.out.println(counter + ") " + videoTitle + " (" + videoId + ") " + videoTags);
       }
-      else if(counter > 1 && isAMatch == true) {
+      else if(counter > 1 && isAMatch == true  && videoLibrary.getVideo(videoId).isFlagged() == false) {
         System.out.println(counter + ") " + videoTitle + " (" + videoId + ") " + videoTags);
       }
       else if((z == videoArray.size() - 1) && (counter == 0)) {
@@ -633,12 +645,12 @@ public class VideoPlayer {
 
     for(int z = 0; z < videoArray.size(); z++) {
       videoTagsWithCommas = videoArray.get(videosMap.get(titleSort.get(z))).getTags();
+      videoId = videoArray.get(videosMap.get(titleSort.get(z))).getVideoId();
       for(int currentTag = 0; currentTag < videoTagsWithCommas.size(); currentTag++) {
-        if(videoTagsWithCommas.get(currentTag).toLowerCase().contains(videoTag.toLowerCase()) && videoTag.toLowerCase().contains("#")) {
+        if(videoTagsWithCommas.get(currentTag).toLowerCase().contains(videoTag.toLowerCase()) && videoTag.toLowerCase().contains("#")  && videoLibrary.getVideo(videoId).isFlagged() == false) {
           isAMatch = true;
           counter++;
           videoTitle = titleSort.get(z);
-          videoId = videoArray.get(videosMap.get(titleSort.get(z))).getVideoId();
           searchVideosMap.put(counter, videoId);
           videoTags = "[";
 
@@ -654,11 +666,11 @@ public class VideoPlayer {
         }
       }
 
-      if(counter == 1 && isAMatch == true) {
+      if(counter == 1 && isAMatch == true  && videoLibrary.getVideo(videoId).isFlagged() == false) {
         System.out.println("Here are the results for " + videoTag + ":");
         System.out.println(counter + ") " + videoTitle + " (" + videoId + ") " + videoTags);
       }
-      else if(counter > 1 && isAMatch == true) {
+      else if(counter > 1 && isAMatch == true  && videoLibrary.getVideo(videoId).isFlagged() == false) {
         System.out.println(counter + ") " + videoTitle + " (" + videoId + ") " + videoTags);
       }
       else if((z == videoArray.size() - 1) && (counter == 0)) {
@@ -737,6 +749,30 @@ public class VideoPlayer {
   }
 
   public void allowVideo(String videoId) {
-    System.out.println("allowVideo needs implementation");
+    
+    ArrayList<Video> videoArray = new ArrayList<>(videoLibrary.getVideos());
+    HashMap<String, String> videosIdToTitleMap = new HashMap<>();
+
+    /* Mapping video's ids to titles*/
+    for(int i = 0; i < videoArray.size(); i++) {
+      videosIdToTitleMap.put(videoArray.get(i).getVideoId(), videoArray.get(i).getTitle());
+    }
+
+    if(videosIdToTitleMap.get(videoId) == null) {
+      System.out.println("Cannot remove flag from video: Video does not exist");
+    }
+    else if(videoLibrary.getVideo(videoId).isFlagged() == false) {
+      System.out.println("Cannot remove flag from video: Video is not flagged");
+    }
+    else {
+      videoLibrary.getVideo(videoId).setFlaggedFalse();
+      videoLibrary.getVideo(videoId).setFlagReason(null);
+      if(currentlyPlayingBool == true && currentlyPlayingId == videoId) {
+        stopVideo();
+      }
+      System.out.println("Successfully removed flag from video: " + videosIdToTitleMap.get(videoId));
+    }
+
+
   }
 }

@@ -1,63 +1,127 @@
 -------------------------------------------------------------------------------
 Test set: com.google.Part4Test
 -------------------------------------------------------------------------------
-Tests run: 18, Failures: 7, Errors: 0, Skipped: 0, Time elapsed: 0.213 s <<< FAILURE! - in com.google.Part4Test
-com.google.Part4Test.testAllowVideo  Time elapsed: 0.045 s  <<< FAILURE!
-java.lang.AssertionError: 
-
-Expected: a string containing "Successfully removed flag from video: Amazing Cats"
-     but: was "allowVideo needs implementation"
-	at com.google.Part4Test.testAllowVideo(Part4Test.java:236)
+Tests run: 18, Failures: 16, Errors: 1, Skipped: 0, Time elapsed: 0.08 s <<< FAILURE! - in com.google.Part4Test
+com.google.Part4Test.testAllowVideo  Time elapsed: 0.002 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Couldn't find videos.txt
+Cannot flag video: Video does not exist
+Cannot remove flag from video: Video does not exist
+ ==> expected: <2> but was: <3>
+	at com.google.Part4Test.testAllowVideo(Part4Test.java:233)
 
 com.google.Part4Test.testAllowVideoNotFlagged  Time elapsed: 0.002 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <1> but was: <2>
+	at com.google.Part4Test.testAllowVideoNotFlagged(Part4Test.java:244)
+
+com.google.Part4Test.testFlagVideoStopPausedVideo  Time elapsed: 0.002 s  <<< FAILURE!
 java.lang.AssertionError: 
 
-Expected: a string containing "Cannot remove flag from video: Video is not flagged"
-     but: was "allowVideo needs implementation
-"
-	at com.google.Part4Test.testAllowVideoNotFlagged(Part4Test.java:245)
+Expected: a string containing "Playing video: Amazing Cats"
+     but: was "Couldn't find videos.txt"
+	at com.google.Part4Test.testFlagVideoStopPausedVideo(Part4Test.java:204)
 
-com.google.Part4Test.testFlagVideosPlayRandom  Time elapsed: 0.003 s  <<< FAILURE!
-java.lang.AssertionError: 
+com.google.Part4Test.testFlagVideosPlayRandom  Time elapsed: 0.004 s  <<< ERROR!
+java.lang.IllegalArgumentException: bound must be positive
+	at com.google.Part4Test.testFlagVideosPlayRandom(Part4Test.java:66)
 
-Expected: a string containing "No videos available"
-     but: was "Playing video: Another Cat Video"
-	at com.google.Part4Test.testFlagVideosPlayRandom(Part4Test.java:79)
+com.google.Part4Test.testAllowVideoNonexistent  Time elapsed: 0.003 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <1> but was: <2>
+	at com.google.Part4Test.testAllowVideoNonexistent(Part4Test.java:252)
 
-com.google.Part4Test.testAllowVideoNonexistent  Time elapsed: 0.001 s  <<< FAILURE!
-java.lang.AssertionError: 
-
-Expected: a string containing "Cannot remove flag from video: Video does not exist"
-     but: was "allowVideo needs implementation
-"
-	at com.google.Part4Test.testAllowVideoNonexistent(Part4Test.java:253)
-
-com.google.Part4Test.testAllowVideoShowPlaylist  Time elapsed: 0.004 s  <<< FAILURE!
-java.lang.AssertionError: 
-
-Expected: a string containing "Successfully removed flag from video: Amazing Cats"
-     but: was "allowVideo needs implementation"
-	at com.google.Part4Test.testAllowVideoShowPlaylist(Part4Test.java:276)
-
-com.google.Part4Test.testFlagVideoSearchVideos  Time elapsed: 0.021 s  <<< FAILURE!
+com.google.Part4Test.testFlagVideoAddVideoToPlaylist  Time elapsed: 0.003 s  <<< FAILURE!
 org.opentest4j.AssertionFailedError: 
-Successfully flagged video: Amazing Cats (reason: dont_like_cats)
-Here are the results for cat:
-1) Amazing Cats (amazing_cats_video_id) [#cat #animal]
-2) Another Cat Video (another_cat_video_id) [#cat #animal]
-Would you like to play any of the above? If yes, specify the number of the video.
-If your answer is not a valid number, we will assume it's a no.
- ==> expected: <5> but was: <6>
+Couldn't find videos.txt
+Cannot flag video: Video does not exist
+Successfully created new playlist: my_playlist
+Cannot add video to my_playlist: Video does not exist
+ ==> expected: <3> but was: <4>
+	at com.google.Part4Test.testFlagVideoAddVideoToPlaylist(Part4Test.java:90)
+
+com.google.Part4Test.testFlagVideoShowAllVideos  Time elapsed: 0.003 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Couldn't find videos.txt
+Cannot flag video: Video does not exist
+Here's a list of all available videos:
+ ==> expected: <7> but was: <3>
+	at com.google.Part4Test.testFlagVideoShowAllVideos(Part4Test.java:124)
+
+com.google.Part4Test.testFlagVideoKeepVideoPlayingIfDifferentFromFlaggedVideo  Time elapsed: 0.003 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Couldn't find videos.txt
+Cannot play video: Video does not exist
+Cannot flag video: Video does not exist
+No video is currently playing
+ ==> expected: <3> but was: <4>
+	at com.google.Part4Test.testFlagVideoKeepVideoPlayingIfDifferentFromFlaggedVideo(Part4Test.java:219)
+
+com.google.Part4Test.testAllowVideoShowPlaylist  Time elapsed: 0.002 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Couldn't find videos.txt
+Successfully created new playlist: my_playlist
+Cannot add video to my_playlist: Video does not exist
+Cannot flag video: Video does not exist
+Showing playlist: my_playlist
+No videos here yet
+Cannot remove flag from video: Video does not exist
+Showing playlist: my_playlist
+No videos here yet
+ ==> expected: <8> but was: <9>
+	at com.google.Part4Test.testAllowVideoShowPlaylist(Part4Test.java:267)
+
+com.google.Part4Test.testFlagVideoSearchVideos  Time elapsed: 0.004 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Couldn't find videos.txt
+Cannot flag video: Video does not exist
+ ==> expected: <5> but was: <2>
 	at com.google.Part4Test.testFlagVideoSearchVideos(Part4Test.java:148)
+
+com.google.Part4Test.testFlagVideoStopPlayingVideo  Time elapsed: 0.003 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: a string containing "Playing video: Amazing Cats"
+     but: was "Couldn't find videos.txt"
+	at com.google.Part4Test.testFlagVideoStopPlayingVideo(Part4Test.java:188)
 
 com.google.Part4Test.testFlagVideoSearchVideosWithTag  Time elapsed: 0.004 s  <<< FAILURE!
 org.opentest4j.AssertionFailedError: 
-Successfully flagged video: Amazing Cats (reason: dont_like_cats)
-Here are the results for #cat:
-1) Amazing Cats (amazing_cats_video_id) [#cat #animal]
-2) Another Cat Video (another_cat_video_id) [#cat #animal]
-Would you like to play any of the above? If yes, specify the number of the video.
-If your answer is not a valid number, we will assume it's a no.
- ==> expected: <5> but was: <6>
+Couldn't find videos.txt
+Cannot flag video: Video does not exist
+ ==> expected: <5> but was: <2>
 	at com.google.Part4Test.testFlagVideoSearchVideosWithTag(Part4Test.java:168)
+
+com.google.Part4Test.testFlagVideoCanNoLongerPlay  Time elapsed: 0.002 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Couldn't find videos.txt
+Cannot flag video: Video does not exist
+Cannot play video: Video does not exist
+ ==> expected: <2> but was: <3>
+	at com.google.Part4Test.testFlagVideoCanNoLongerPlay(Part4Test.java:52)
+
+com.google.Part4Test.testFlagVideoWithoutReason  Time elapsed: 0.002 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <1> but was: <2>
+	at com.google.Part4Test.testFlagVideoWithoutReason(Part4Test.java:22)
+
+com.google.Part4Test.testFlagVideoShowPlaylist  Time elapsed: 0.004 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Couldn't find videos.txt
+Successfully created new playlist: my_playlist
+Cannot add video to my_playlist: Video does not exist
+Cannot flag video: Video does not exist
+Showing playlist: my_playlist
+No videos here yet
+ ==> expected: <5> but was: <6>
+	at com.google.Part4Test.testFlagVideoShowPlaylist(Part4Test.java:107)
+
+com.google.Part4Test.testFlagVideoWithReason  Time elapsed: 0.003 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <1> but was: <2>
+	at com.google.Part4Test.testFlagVideoWithReason(Part4Test.java:14)
+
+com.google.Part4Test.testFlagVideoAlreadyFlagged  Time elapsed: 0.007 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Couldn't find videos.txt
+Cannot flag video: Video does not exist
+Cannot flag video: Video does not exist
+ ==> expected: <2> but was: <3>
+	at com.google.Part4Test.testFlagVideoAlreadyFlagged(Part4Test.java:33)
 

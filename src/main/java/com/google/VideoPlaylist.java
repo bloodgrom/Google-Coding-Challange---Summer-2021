@@ -30,15 +30,17 @@ class VideoPlaylist {
     return idList;
   }
 
-   /** Returns the title of the playlist. */
+   /** Adds video to the playlist */
   void addVideoToPlaylist(String video_id) {
     this.idList.add(video_id);
   }
 
+  /** Removes a video from the plalist */
   void removeVideoFromPlaylist(String video_id) {
     this.idList.remove(video_id);
   }
 
+  /** Clears playlist(Deletes all videos inside) */
   void clearPlaylist() {
     this.idList.clear();
   }

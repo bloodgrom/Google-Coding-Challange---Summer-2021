@@ -1,4 +1,137 @@
 -------------------------------------------------------------------------------
 Test set: com.google.Part1Test
 -------------------------------------------------------------------------------
-Tests run: 21, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.118 s - in com.google.Part1Test
+Tests run: 21, Failures: 19, Errors: 2, Skipped: 0, Time elapsed: 0.126 s <<< FAILURE! - in com.google.Part1Test
+com.google.Part1Test.testStopVideo  Time elapsed: 0.028 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Couldn't find videos.txt
+Cannot play video: Video does not exist
+Cannot stop video: No video is currently playing
+ ==> expected: <2> but was: <3>
+	at com.google.Part1Test.testStopVideo(Part1Test.java:87)
+
+com.google.Part1Test.testPauseAlreadyPausedVideo  Time elapsed: 0.014 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <3> but was: <4>
+	at com.google.Part1Test.testPauseAlreadyPausedVideo(Part1Test.java:200)
+
+com.google.Part1Test.testPlayRandomVideoStopsPreviousVideo  Time elapsed: 0.004 s  <<< ERROR!
+java.lang.IllegalArgumentException: bound must be positive
+	at com.google.Part1Test.testPlayRandomVideoStopsPreviousVideo(Part1Test.java:124)
+
+com.google.Part1Test.testPlayVideo  Time elapsed: 0.003 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <1> but was: <2>
+	at com.google.Part1Test.testPlayVideo(Part1Test.java:47)
+
+com.google.Part1Test.testPlayRandomVideo  Time elapsed: 0.002 s  <<< ERROR!
+java.lang.IllegalArgumentException: bound must be positive
+	at com.google.Part1Test.testPlayRandomVideo(Part1Test.java:116)
+
+com.google.Part1Test.testStopVideoTwice  Time elapsed: 0.003 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Couldn't find videos.txt
+Cannot play video: Video does not exist
+Cannot stop video: No video is currently playing
+Cannot stop video: No video is currently playing
+ ==> expected: <3> but was: <4>
+	at com.google.Part1Test.testStopVideoTwice(Part1Test.java:99)
+
+com.google.Part1Test.testPlayVideoStopPrevious  Time elapsed: 0.012 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: a string containing "Playing video: Amazing Cats"
+     but: was "Couldn't find videos.txt"
+	at com.google.Part1Test.testPlayVideoStopPrevious(Part1Test.java:65)
+
+com.google.Part1Test.testPauseVideo  Time elapsed: 0.003 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Couldn't find videos.txt
+Cannot play video: Video does not exist
+Cannot pause video: No video is currently playing
+ ==> expected: <2> but was: <3>
+	at com.google.Part1Test.testPauseVideo(Part1Test.java:158)
+
+com.google.Part1Test.testShowPlaying  Time elapsed: 0.003 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Couldn't find videos.txt
+Cannot play video: Video does not exist
+No video is currently playing
+ ==> expected: <2> but was: <3>
+	at com.google.Part1Test.testShowPlaying(Part1Test.java:139)
+
+com.google.Part1Test.testContinueVideoNothingPlaying  Time elapsed: 0.002 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <1> but was: <2>
+	at com.google.Part1Test.testContinueVideoNothingPlaying(Part1Test.java:241)
+
+com.google.Part1Test.testContinueVideo  Time elapsed: 0.002 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Couldn't find videos.txt
+Cannot play video: Video does not exist
+Cannot pause video: No video is currently playing
+Cannot continue video: No video is currently playing
+ ==> expected: <3> but was: <4>
+	at com.google.Part1Test.testContinueVideo(Part1Test.java:221)
+
+com.google.Part1Test.testPlayVideoDontStopPreviousIfNonExistent  Time elapsed: 0.001 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Couldn't find videos.txt
+Cannot play video: Video does not exist
+Cannot play video: Video does not exist
+ ==> expected: <2> but was: <3>
+	at com.google.Part1Test.testPlayVideoDontStopPreviousIfNonExistent(Part1Test.java:76)
+
+com.google.Part1Test.testPauseVideoShowVideo  Time elapsed: 0.002 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Couldn't find videos.txt
+Cannot play video: Video does not exist
+Cannot pause video: No video is currently playing
+No video is currently playing
+ ==> expected: <3> but was: <4>
+	at com.google.Part1Test.testPauseVideoShowVideo(Part1Test.java:170)
+
+com.google.Part1Test.testPauseVideoPlayVideo  Time elapsed: 0.002 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: a string containing "Playing video: Amazing Cats"
+     but: was "Couldn't find videos.txt"
+	at com.google.Part1Test.testPauseVideoPlayVideo(Part1Test.java:186)
+
+com.google.Part1Test.testContinueVideoNotPaused  Time elapsed: 0.001 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Couldn't find videos.txt
+Cannot play video: Video does not exist
+Cannot continue video: No video is currently playing
+ ==> expected: <2> but was: <3>
+	at com.google.Part1Test.testContinueVideoNotPaused(Part1Test.java:233)
+
+com.google.Part1Test.testPlayVideoNonExistent  Time elapsed: 0.004 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <1> but was: <2>
+	at com.google.Part1Test.testPlayVideoNonExistent(Part1Test.java:54)
+
+com.google.Part1Test.testNumberOfVideos  Time elapsed: 0.002 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: a string containing "5 videos in the library"
+     but: was "Couldn't find videos.txt
+0 videos in the library
+"
+	at com.google.Part1Test.testNumberOfVideos(Part1Test.java:22)
+
+com.google.Part1Test.testShowAllVideos  Time elapsed: 0.002 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Couldn't find videos.txt
+Here's a list of all available videos:
+ ==> expected: <6> but was: <2>
+	at com.google.Part1Test.testShowAllVideos(Part1Test.java:30)
+
+com.google.Part1Test.testPauseVideoNothingPlaying  Time elapsed: 0.002 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <1> but was: <2>
+	at com.google.Part1Test.testPauseVideoNothingPlaying(Part1Test.java:209)
+
+com.google.Part1Test.testShowNothingPlaying  Time elapsed: 0.001 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <1> but was: <2>
+	at com.google.Part1Test.testShowNothingPlaying(Part1Test.java:148)
+
+com.google.Part1Test.testStopVideoNothingPlaying  Time elapsed: 0.001 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <1> but was: <2>
+	at com.google.Part1Test.testStopVideoNothingPlaying(Part1Test.java:109)
+
